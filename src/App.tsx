@@ -369,7 +369,7 @@ function Hero() {
         <figure className="relative mx-auto flex w-full max-w-[380px] items-end justify-center lg:h-[440px] lg:max-w-none">
           <img
             src={HERO_MEDIA.cleaner}
-            alt="Cleaning technician in a navy company polo, wearing gloves and ready to help"
+            alt="Simple Cooling technician cleaning a luxury living room sofa"
             className="max-h-[390px] w-auto max-w-full object-contain object-bottom lg:absolute lg:bottom-0 lg:h-full lg:max-h-none"
             fetchPriority="high"
           />
@@ -622,7 +622,7 @@ function WhyUs() {
         <figure className="relative mx-auto w-full max-w-[250px] overflow-hidden rounded-xl sm:max-w-[320px] lg:max-w-none">
           <img
             src={HERO_MEDIA.cleanerWorking}
-            alt="Illustrative cleaning professional vacuuming a sofa, wearing a navy polo with the Simple Cooling logo"
+            alt="Simple Cooling cleaning team working together in a luxury apartment"
             className="aspect-[.78] w-full object-cover"
             loading="lazy"
           />

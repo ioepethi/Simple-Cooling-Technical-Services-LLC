@@ -12,12 +12,11 @@ paths and accurate alt text in `src/lib/media.ts`.
 
 ## Media slots
 
-- Hero: `public/media/hero/cleaner-branded.webp` is cropped from the
-  reference image you supplied, with your original logo overlaid cleanly
-  on the shirt. `poster.webp` supplies the soft room-photo backdrop.
-  The input reference is a website mockup, so its crop is necessarily
-  softer than an original photograph. Replace it with your real staff photo
-  at the same path for the best quality.
+- Hero: `public/media/company/living-room-cleaning.webp` and the
+  `carpet-cleaning-city.webp` backdrop are sourced from your `Company Data/Photo`
+  folder.
+- Why Choose: `public/media/company/team-apartment.webp` uses your supplied
+  Simple Cooling team photo.
 - Services: `public/media/services/*.webp`; the 10 filenames and alt text
   are listed in `SERVICE_IMAGES` in `src/lib/media.ts`.
 - Gallery: `public/media/gallery/*.webp` currently shows illustrative

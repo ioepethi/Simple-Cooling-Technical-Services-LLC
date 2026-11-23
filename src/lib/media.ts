@@ -11,9 +11,9 @@
  */
 
 export const HERO_MEDIA = {
-  poster: '/media/hero/poster.webp',
-  cleaner: '/media/hero/cleaner-branded.webp',
-  cleanerWorking: '/media/hero/cleaner-working-branded.webp',
+  cleaner: '/media/company/living-room-cleaning.webp',
+  cleanerWorking: '/media/company/team-apartment.webp',
+  carpetBackdrop: '/media/company/carpet-cleaning-city.webp',
 }
 
 export interface MediaSlot {
