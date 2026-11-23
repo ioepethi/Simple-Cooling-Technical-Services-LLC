@@ -137,74 +137,76 @@ function Header() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-3 md:flex" aria-label="Main">
-          <a href="#home" className="text-xs font-semibold text-slate-700 hover:text-brand-orange">
-            Home
-          </a>
-          <a href="#about" className="text-xs font-semibold text-slate-700 hover:text-brand-orange">
-            About Us
-          </a>
-          <div className="group relative">
-            <button
-              className="flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-orange"
-              aria-haspopup="true"
-              aria-expanded={servicesOpen}
-              aria-controls="desktop-services-menu"
-              onClick={() => setServicesOpen(!servicesOpen)}
-            >
-              Our Services <ChevronDown className="h-4 w-4" />
-            </button>
-            <div
-              id="desktop-services-menu"
-              className={`invisible absolute left-0 top-full w-60 rounded-xl border border-slate-100 bg-white py-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
-                servicesOpen ? '!visible !opacity-100' : ''
-              }`}
-            >
-              {SERVICES_MENU.map((s) => (
-                <a
-                  key={s}
-                  href="#services"
-                  onClick={() => setServicesOpen(false)}
-                  className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand-orange"
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
-          </div>
-          {nav.slice(2).map((n) => (
-            <a
-              key={n.href}
-              href={n.href}
-              className="text-xs font-semibold text-slate-700 hover:text-brand-orange"
-            >
-              {n.label}
+        <div className="ml-auto flex items-center gap-4">
+          <nav className="hidden items-center gap-3 lg:flex" aria-label="Main">
+            <a href="#home" className="text-xs font-semibold text-slate-700 hover:text-brand-orange">
+              Home
             </a>
-          ))}
-        </nav>
+            <a href="#about" className="text-xs font-semibold text-slate-700 hover:text-brand-orange">
+              About Us
+            </a>
+            <div className="group relative">
+              <button
+                className="flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-orange"
+                aria-haspopup="true"
+                aria-expanded={servicesOpen}
+                aria-controls="desktop-services-menu"
+                onClick={() => setServicesOpen(!servicesOpen)}
+              >
+                Our Services <ChevronDown className="h-4 w-4" />
+              </button>
+              <div
+                id="desktop-services-menu"
+                className={`invisible absolute left-0 top-full w-60 rounded-xl border border-slate-100 bg-white py-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
+                  servicesOpen ? '!visible !opacity-100' : ''
+                }`}
+              >
+                {SERVICES_MENU.map((s) => (
+                  <a
+                    key={s}
+                    href="#services"
+                    onClick={() => setServicesOpen(false)}
+                    className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand-orange"
+                  >
+                    {s}
+                  </a>
+                ))}
+              </div>
+            </div>
+            {nav.slice(2).map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="text-xs font-semibold text-slate-700 hover:text-brand-orange"
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={waLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy sm:inline-flex"
-          >
-            <WhatsAppIcon className="h-4 w-4" /> Book Now
-          </a>
-          <button
-            className="rounded-lg p-2 text-navy md:hidden"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <a
+              href={waLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden items-center gap-2 rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy sm:inline-flex"
+            >
+              <WhatsAppIcon className="h-4 w-4" /> Book Now
+            </a>
+            <button
+              className="rounded-lg p-2 text-navy lg:hidden"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+              aria-expanded={open}
+            >
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {open && (
-        <nav className="border-t border-slate-100 bg-white px-4 pb-4 pt-2 md:hidden" aria-label="Mobile">
+        <nav className="border-t border-slate-100 bg-white px-4 pb-4 pt-2 lg:hidden" aria-label="Mobile">
           {nav.slice(0, 2).map((n) => (
             <a
               key={n.href}
