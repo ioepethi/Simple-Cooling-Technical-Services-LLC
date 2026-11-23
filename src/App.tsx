@@ -3,12 +3,9 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronDown,
-  Clock,
-  Home,
   Mail,
   MapPin,
   Menu,
-  MessageCircle,
   Phone,
   ShieldCheck,
   Sparkles,
@@ -31,7 +28,6 @@ import {
   waLink,
 } from './lib/site'
 import {
-  CONTACT_IMAGE,
   GALLERY_ITEMS,
   GALLERY_SHOWCASE,
   HERO_MEDIA,
@@ -129,29 +125,28 @@ function Header() {
         scrolled ? 'bg-white/95 shadow-md backdrop-blur' : 'bg-white/80 backdrop-blur'
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:h-24 sm:px-6">
-        <a href="#home" className="flex items-center gap-3">
+      <div className="mx-auto flex h-[68px] max-w-[1440px] items-center justify-between px-3 sm:h-20 sm:px-6">
+        <a href="#home" className="flex min-w-0 items-center gap-2">
           <img
             src={logo}
             alt={`${COMPANY} logo`}
-            className="h-14 w-auto object-contain sm:h-[84px]"
+            className="h-12 w-auto object-contain sm:h-[68px]"
           />
-          <span className="hidden border-l border-slate-200 pl-3 text-xs font-semibold leading-snug text-navy xl:block">
-            Simple Cooling
-            <span className="block font-normal text-brand-blue">Technical Services LLC</span>
+          <span className="hidden border-l border-slate-200 pl-2 text-[11px] font-semibold leading-snug text-navy md:block">
+            Technical Services LLC
           </span>
         </a>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="Main">
-          <a href="#home" className="text-sm font-medium text-slate-700 hover:text-brand-orange">
+        <nav className="hidden items-center gap-3 md:flex" aria-label="Main">
+          <a href="#home" className="text-xs font-semibold text-slate-700 hover:text-brand-orange">
             Home
           </a>
-          <a href="#about" className="text-sm font-medium text-slate-700 hover:text-brand-orange">
+          <a href="#about" className="text-xs font-semibold text-slate-700 hover:text-brand-orange">
             About Us
           </a>
           <div className="group relative">
             <button
-              className="flex items-center gap-1 text-sm font-medium text-slate-700 hover:text-brand-orange"
+              className="flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-orange"
               aria-haspopup="true"
             >
               Our Services <ChevronDown className="h-4 w-4" />
@@ -172,7 +167,7 @@ function Header() {
             <a
               key={n.href}
               href={n.href}
-              className="text-sm font-medium text-slate-700 hover:text-brand-orange"
+              className="text-xs font-semibold text-slate-700 hover:text-brand-orange"
             >
               {n.label}
             </a>
@@ -184,12 +179,12 @@ function Header() {
             href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-full bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-brand-orange-dark sm:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy sm:inline-flex"
           >
             <WhatsAppIcon className="h-4 w-4" /> Book Now
           </a>
           <button
-            className="rounded-lg p-2 text-navy lg:hidden"
+            className="rounded-lg p-2 text-navy md:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -200,7 +195,7 @@ function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-slate-100 bg-white px-4 pb-4 pt-2 lg:hidden" aria-label="Mobile">
+        <nav className="border-t border-slate-100 bg-white px-4 pb-4 pt-2 md:hidden" aria-label="Mobile">
           {nav.slice(0, 2).map((n) => (
             <a
               key={n.href}
@@ -289,154 +284,98 @@ function BookingForm() {
   }
 
   const input =
-    'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20'
+    'w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder-slate-500 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20'
 
   return (
     <form
       onSubmit={submit}
-      className="rounded-2xl bg-white p-5 shadow-xl ring-1 ring-slate-900/5"
+      className="overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-navy/10"
       aria-label="Booking enquiry form"
     >
-      <h3 className="text-base font-bold text-navy">Request a Booking</h3>
-      <p className="mb-4 text-xs text-slate-500">We reply on WhatsApp with pricing and availability.</p>
-      <div className="space-y-3">
-        <input required placeholder="Full Name" className={input} value={form.name} onChange={set('name')} />
-        <input
-          required
-          type="tel"
-          placeholder="Mobile Number"
-          className={input}
-          value={form.mobile}
-          onChange={set('mobile')}
-        />
-        <select required className={input} value={form.service} onChange={set('service')}>
+      <h3 className="bg-brand-blue px-5 py-3 text-lg font-bold text-white">Get a Free Quote</h3>
+      <div className="space-y-2.5 p-4">
+        <input required aria-label="Full Name" placeholder="Full Name" className={input} value={form.name} onChange={set('name')} />
+        <input required type="tel" aria-label="Mobile Number" placeholder="Mobile Number" className={input} value={form.mobile} onChange={set('mobile')} />
+        <select required aria-label="Select Cleaning Service" className={input} value={form.service} onChange={set('service')}>
           <option value="">Select Cleaning Service</option>
-          {SERVICES.map((s) => (
-            <option key={s}>{s}</option>
-          ))}
+          {SERVICES.map((s) => <option key={s}>{s}</option>)}
         </select>
-        <select required className={input} value={form.property} onChange={set('property')}>
+        <select required aria-label="Property Type" className={input} value={form.property} onChange={set('property')}>
           <option value="">Property Type</option>
-          {['Studio', 'Apartment', 'Villa', 'Office / Commercial', 'Other'].map((p) => (
-            <option key={p}>{p}</option>
-          ))}
+          {['Studio', 'Apartment', 'Villa', 'Office / Commercial', 'Other'].map((p) => <option key={p}>{p}</option>)}
         </select>
-        <select required className={input} value={form.location} onChange={set('location')}>
+        <select required aria-label="Location / Emirate" className={input} value={form.location} onChange={set('location')}>
           <option value="">Location / Emirate</option>
-          {EMIRATES.map((e2) => (
-            <option key={e2}>{e2}</option>
-          ))}
+          {EMIRATES.map((e2) => <option key={e2}>{e2}</option>)}
         </select>
-        <input
-          type="date"
-          aria-label="Preferred date"
-          className={input}
-          value={form.date}
-          onChange={set('date')}
-        />
-        <textarea
-          placeholder="Additional Requirements"
-          rows={2}
-          className={input}
-          value={form.notes}
-          onChange={set('notes')}
-        />
+        <input type="date" aria-label="Preferred Date" className={input} value={form.date} onChange={set('date')} />
+        <textarea aria-label="Additional Requirements" placeholder="Additional Requirements" rows={2} className={input} value={form.notes} onChange={set('notes')} />
+        <button
+          type="submit"
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-orange-dark"
+        >
+          <WhatsAppIcon className="h-4 w-4" /> Send via WhatsApp
+        </button>
       </div>
-      <button
-        type="submit"
-        className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-5 py-3 text-sm font-bold text-white shadow transition hover:bg-brand-orange-dark"
-      >
-        <WhatsAppIcon className="h-4 w-4" /> Send via WhatsApp
-      </button>
     </form>
-  )
-}
-
-function HeroVideo() {
-  const [ready, setReady] = useState(false)
-  const poster = (
-    <img
-      src={HERO_MEDIA.poster}
-      alt=""
-      aria-hidden="true"
-      fetchPriority="high"
-      className="absolute inset-0 h-full w-full object-cover"
-    />
-  )
-
-  if (!HERO_MEDIA.video && !HERO_MEDIA.videoWebm) return poster
-
-  return (
-    <>
-      {poster}
-      <video
-        className={`absolute inset-0 hidden h-full w-full object-cover transition-opacity duration-700 md:block ${
-          ready ? 'opacity-100' : 'opacity-0'
-        }`}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={HERO_MEDIA.poster}
-        onCanPlay={() => setReady(true)}
-        aria-hidden="true"
-      >
-        {HERO_MEDIA.videoWebm && <source src={HERO_MEDIA.videoWebm} type="video/webm" />}
-        {HERO_MEDIA.video && <source src={HERO_MEDIA.video} type="video/mp4" />}
-      </video>
-    </>
   )
 }
 
 function Hero() {
   const trust = [
-    { icon: Home, label: 'Residential & Commercial Cleaning' },
-    { icon: Sparkles, label: 'Professional Cleaning Solutions' },
-    { icon: MapPin, label: 'Serving All UAE Emirates' },
+    { icon: ShieldCheck, label: <>Reliable<br />Service</> },
+    { icon: Sparkles, label: <>Professional<br />Cleaners</> },
+    { icon: MapPin, label: <>Serving All<br />UAE Emirates</> },
   ]
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-light to-brand-blue pb-16 pt-32 text-white sm:pt-36"
+      className="relative overflow-hidden bg-[#f4f7f9] pt-24 text-navy sm:pt-28"
     >
-      <HeroVideo />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/75 to-navy/60" aria-hidden="true" />
-      <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand-orange/25 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-brand-teal/25 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr]">
-        <div>
-          <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-orange-200 ring-1 ring-white/20">
-            <MapPin className="h-3.5 w-3.5" /> Professional Cleaning Services Across All Emirates of the UAE
+      <div className="hero-backdrop absolute inset-0" aria-hidden="true" />
+      <div className="relative mx-auto grid max-w-[1440px] items-center gap-4 px-4 pb-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(250px,.9fr)_minmax(270px,.82fr)] lg:gap-3 lg:px-8 lg:pb-3">
+        <div className="relative z-10 py-5 sm:py-8 lg:py-10">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[.12em] text-brand-blue">
+            Professional cleaning • Across the UAE
           </p>
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-            Experience the Difference of{' '}
-            <span className="bg-gradient-to-r from-orange-300 to-sky-300 bg-clip-text text-transparent">
-              Professional Cleaning
-            </span>
+          <h1 className="max-w-[560px] text-[2.5rem] font-extrabold leading-[1.02] tracking-tight text-navy sm:text-5xl xl:text-[3.7rem]">
+            Professional<br className="hidden xl:block" /> Cleaning Services
+            <span className="block text-brand-orange">Across the UAE</span>
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-slate-200">
-            From apartments to villas and commercial spaces, Simple Cooling delivers professional
-            cleaning solutions across the entire UAE.
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-slate-700 sm:text-lg">
+            Experience a cleaner, fresher, and healthier environment with Simple Cooling Technical Services LLC.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <WaButton className="!px-7 !py-3 !text-base">Book Your Cleaning</WaButton>
-            <WaButton
-              className="!bg-white/10 !text-white ring-1 ring-white/30 hover:!bg-white/20 !px-7 !py-3 !text-base"
-              message={`Hello ${COMPANY}, I would like to chat about your cleaning services.`}
-            >
-              WhatsApp Us
+          <div className="mt-5 flex flex-wrap gap-2.5">
+            <WaButton className="!rounded-lg !bg-brand-orange !px-5 !py-3 !text-sm hover:!bg-brand-orange-dark">
+              Book Your Cleaning
             </WaButton>
+            <a
+              href={PHONE_TEL}
+              className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-blue"
+            >
+              <Phone className="h-4 w-4" /> Call Us Now
+            </a>
           </div>
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-            {trust.map((t) => (
-              <li key={t.label} className="flex items-center gap-2 text-sm text-slate-200">
-                <t.icon className="h-4 w-4 text-orange-300" /> {t.label}
+          <ul className="mt-6 grid max-w-[480px] grid-cols-3 divide-x divide-brand-blue/40">
+            {trust.map((t, i) => (
+              <li key={i} className="flex flex-col items-center gap-1 px-2 text-center text-xs font-semibold leading-tight text-navy sm:text-sm">
+                <t.icon className="h-6 w-6 text-brand-blue" />
+                {t.label}
               </li>
             ))}
           </ul>
         </div>
-        <div className="lg:justify-self-end">
+
+        <figure className="relative mx-auto flex w-full max-w-[380px] items-end justify-center lg:h-[440px] lg:max-w-none">
+          <img
+            src={HERO_MEDIA.cleaner}
+            alt="Cleaning technician in a navy company polo, wearing gloves and ready to help"
+            className="max-h-[390px] w-auto max-w-full object-contain object-bottom lg:absolute lg:bottom-0 lg:h-full lg:max-h-none"
+            fetchPriority="high"
+          />
+        </figure>
+
+        <div className="relative z-10 mx-auto w-full max-w-[390px] lg:max-w-none">
           <BookingForm />
         </div>
       </div>
@@ -516,63 +455,58 @@ function About() {
   )
 }
 
-const SERVICE_CARDS: { title: string; desc: string }[] = [
+const SERVICE_CARDS: { title: string; desc: string; price?: string }[] = [
   { title: 'Residential Cleaning', desc: 'Regular and deep cleaning for homes of every size, keeping your space fresh and comfortable.' },
-  { title: 'Apartment Deep Cleaning', desc: 'Thorough top-to-bottom deep cleaning packages for studios and apartments — from AED 250.' },
-  { title: 'Villa Deep Cleaning', desc: 'Complete villa deep cleaning including outdoor areas, for a spotless home inside and out.' },
+  { title: 'Apartment Deep Cleaning', desc: 'Thorough top-to-bottom deep cleaning packages for studios and apartments.', price: 'From AED 250' },
+  { title: 'Villa Deep Cleaning', desc: 'Complete villa deep cleaning including outdoor areas.', price: 'AED 2,000' },
   { title: 'Commercial Cleaning', desc: 'Professional cleaning for offices and commercial spaces, tailored to your business needs.' },
   { title: 'General Cleaning', desc: 'Flexible cleaning support for day-to-day upkeep of your home or workplace.' },
-  { title: 'Carpet Cleaning', desc: 'Wet and dry carpet shampooing with vacuum equipment — deep, fabric-conscious cleaning.' },
-  { title: 'Sofa Cleaning', desc: 'Wet and dry cleaning, shampooing and disinfectant treatment — AED 35 per seater.' },
-  { title: 'Curtain Cleaning', desc: 'Curtain cleaning and steaming, suitable for thick and thin curtains — AED 145 per panel.' },
-  { title: 'Furniture Cleaning', desc: 'Careful cleaning for your furniture to refresh and extend the life of every piece.' },
-  { title: 'Marble Polishing & Stain Removal', desc: 'Marble polishing and stain removal — quoted after inspection of the surface.' },
+  { title: 'Carpet Cleaning', desc: 'Wet and dry carpet shampooing with vacuum equipment.', price: 'From AED 80' },
+  { title: 'Sofa Cleaning', desc: 'Wet and dry cleaning, shampooing and disinfectant treatment.', price: 'AED 35 / seater' },
+  { title: 'Curtain Cleaning', desc: 'Curtain cleaning and steaming, suitable for thick and thin curtains.', price: 'AED 145 / panel' },
+  { title: 'Furniture Cleaning', desc: 'Careful cleaning for your furniture to refresh each piece.' },
+  { title: 'Marble Polishing & Stain Removal', desc: 'Marble polishing and stain removal — quoted after inspection.' },
 ]
 
 function Services() {
   return (
-    <section id="services" className="bg-slate-50 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Our Services"
-          title="Cleaning Services for Every Space"
-          subtitle="Residential and commercial cleaning solutions delivered across all emirates of the UAE."
-        />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="services" className="bg-white py-8 sm:py-11">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <div className="text-center">
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-0.5 w-10 bg-brand-orange" />
+            <h2 className="text-2xl font-extrabold text-navy sm:text-3xl">Our Cleaning Services</h2>
+            <span className="h-0.5 w-10 bg-brand-orange" />
+          </div>
+          <p className="mt-1 text-sm text-slate-600">Comprehensive cleaning solutions for your home and business.</p>
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {SERVICE_CARDS.map((s, i) => (
             <div
               key={s.title}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 transition hover:shadow-lg"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-xl bg-white shadow-[0_3px_12px_rgba(15,36,64,.12)] ring-1 ring-slate-100 transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <MediaImage
                 src={SERVICE_IMAGES[s.title].src}
                 alt={SERVICE_IMAGES[s.title].alt}
-                label={s.title}
                 tone={i % 3 === 0 ? 'orange' : i % 3 === 1 ? 'blue' : 'teal'}
-                className="h-40 w-full object-cover transition group-hover:scale-[1.03]"
+                className="aspect-[1.75] w-full object-cover transition duration-300 group-hover:scale-[1.03]"
               />
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="font-bold text-navy">{s.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.desc}</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <a
-                    href={waLink(`Hello ${COMPANY}, I would like to know more about: ${s.title}`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-brand-blue hover:text-brand-orange"
-                  >
-                    Learn More <ArrowRight className="h-4 w-4" />
-                  </a>
-                  <a
-                    href={waLink(`Hello ${COMPANY}, I would like to enquire about: ${s.title}`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Enquire about ${s.title} on WhatsApp`}
-                    className="rounded-full bg-[#25D366] p-2 text-white transition hover:bg-[#1eb855]"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                  </a>
+              <div className="flex flex-1 items-center justify-between gap-2 p-2.5 sm:p-3">
+                <div className="min-w-0">
+                  <h3 className="text-xs font-extrabold leading-tight text-navy sm:text-sm">{s.title}</h3>
+                  {s.price && <p className="mt-1 text-[10px] font-semibold text-brand-blue sm:text-xs">{s.price}</p>}
+                  <p className="sr-only">{s.desc}</p>
                 </div>
+                  <a
+                    href={waLink(`Hello ${COMPANY}, I would like to book ${s.title}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Book ${s.title} on WhatsApp`}
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition hover:bg-brand-blue"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
               </div>
             </div>
           ))}
@@ -584,111 +518,91 @@ function Services() {
 
 function Pricing() {
   return (
-    <section id="pricing" className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Pricing"
-          title="Residential Deep Cleaning Packages"
-          subtitle="Clear, transparent pricing — no hidden fees. Book the package that fits your home."
-        />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+    <section id="pricing" className="bg-gradient-to-r from-[#064b83] via-[#07578e] to-[#073c6a] py-7 text-white sm:py-9">
+      <div className="mx-auto grid max-w-[1440px] gap-5 px-4 sm:px-6 lg:grid-cols-[220px_1fr] lg:items-center lg:px-8">
+        <div>
+          <p className="text-xl font-extrabold leading-tight text-orange-300 sm:text-2xl">
+            Transparent Pricing.
+          </p>
+          <h2 className="text-xl font-extrabold leading-tight text-white sm:text-2xl">No Hidden Charges.</h2>
+          <p className="mt-2 text-sm text-sky-100">Affordable rates for all your cleaning needs.</p>
+          <a href="#specialty-pricing" className="mt-4 inline-flex rounded-full bg-brand-orange px-4 py-2 text-xs font-bold text-white hover:bg-brand-orange-dark">
+            More Services <ArrowRight className="ml-2 h-4 w-4" />
+          </a>
+        </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {PACKAGES.map((p) => (
-            <div
-              key={p.name}
-              className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-            >
-              <h3 className="text-sm font-semibold text-slate-600">{p.name}</h3>
-              <p className="mt-3 text-3xl font-extrabold text-navy">{p.price}</p>
-              <p className="mt-1 text-xs text-slate-400">Deep cleaning</p>
-              <WaButton
-                className="mt-5 w-full"
-                message={`Hello ${COMPANY}, I would like to book: ${p.name} Deep Cleaning (${p.price})`}
+            <article key={p.name} className="flex min-h-[142px] flex-col items-center justify-between rounded-xl bg-white p-3 text-center text-navy shadow-md sm:p-4">
+              <h3 className="text-xs font-bold leading-tight sm:text-sm">{p.name}</h3>
+              <p className="text-[11px] font-semibold text-slate-500">AED <strong className="text-2xl font-extrabold text-navy sm:text-3xl">{p.price.replace('AED ', '')}</strong></p>
+              <a
+                href={waLink(`Hello ${COMPANY}, I would like to book: ${p.name} Deep Cleaning (${p.price})`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full rounded-full bg-brand-orange px-2 py-2 text-xs font-bold text-white transition hover:bg-brand-orange-dark"
               >
                 Book Now
-              </WaButton>
-            </div>
+              </a>
+            </article>
           ))}
-          <div className="relative flex flex-col rounded-2xl bg-gradient-to-br from-brand-orange to-brand-blue p-6 text-center text-white shadow-lg transition hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-navy px-3 py-1 text-xs font-bold uppercase tracking-wide">
-              Featured
-            </span>
-            <h3 className="text-sm font-semibold text-orange-100">{VILLA_PACKAGE.name}</h3>
-            <p className="mt-3 text-3xl font-extrabold">{VILLA_PACKAGE.price}</p>
-            <p className="mt-1 text-xs text-orange-100">{VILLA_PACKAGE.note}</p>
-            <WaButton
-              className="mt-5 w-full !bg-white !text-navy hover:!bg-slate-100"
-              message={`Hello ${COMPANY}, I would like to book: ${VILLA_PACKAGE.name} (${VILLA_PACKAGE.price})`}
+          <article className="relative flex min-h-[142px] flex-col items-center justify-between rounded-xl border-2 border-brand-orange bg-white p-3 text-center text-navy shadow-lg sm:p-4">
+            <span className="absolute -top-3 rounded-full bg-brand-orange px-3 py-1 text-[10px] font-extrabold text-white">BEST VALUE</span>
+            <h3 className="mt-2 text-xs font-bold leading-tight sm:text-sm">Full Villa<br />Deep Cleaning</h3>
+            <p className="text-[11px] font-semibold text-slate-500">AED <strong className="text-2xl font-extrabold text-navy sm:text-3xl">2,000</strong></p>
+            <a
+              href={waLink(`Hello ${COMPANY}, I would like to book: ${VILLA_PACKAGE.name} (${VILLA_PACKAGE.price})`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-full bg-brand-orange px-2 py-2 text-xs font-bold text-white transition hover:bg-brand-orange-dark"
             >
               Book Now
-            </WaButton>
-          </div>
+            </a>
+            <p className="text-[10px] font-medium text-slate-500">Including outdoor areas</p>
+          </article>
         </div>
+      </div>
+    </section>
+  )
+}
 
-        <div className="mt-20">
-          <SectionHeading
-            eyebrow="Specialized Cleaning"
-            title="Carpet, Sofa & Curtain Cleaning"
-            subtitle="Deep, fabric-conscious cleaning with wet and dry methods, shampooing and professional equipment."
-          />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-navy">Carpet Cleaning</h3>
-              <ul className="mt-4 divide-y divide-slate-100">
-                {CARPET_PRICES.map((c) => (
-                  <li key={c.size} className="flex items-center justify-between py-2.5 text-sm">
-                    <span className="text-slate-600">{c.size}</span>
-                    <span className="font-bold text-navy">{c.price}</span>
-                  </li>
-                ))}
-              </ul>
-              <ul className="mt-4 space-y-1.5 text-xs text-slate-500">
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Wet and dry cleaning included</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Carpet shampooing</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Deep, fabric-conscious cleaning</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Vacuum cleaning equipment</li>
-              </ul>
-              <WaButton
-                className="mt-5 w-full"
-                message={`Hello ${COMPANY}, I would like to enquire about Carpet Cleaning`}
-              >
-                Book Carpet Cleaning
-              </WaButton>
-            </div>
-            <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-navy">Sofa Cleaning</h3>
-              <p className="mt-3 text-3xl font-extrabold text-navy">{SOFA_PRICE}</p>
-              <ul className="mt-4 space-y-1.5 text-sm text-slate-500">
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Wet and dry cleaning</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Shampooing</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Disinfectant treatment</li>
-              </ul>
-              <WaButton
-                className="mt-5 w-full"
-                message={`Hello ${COMPANY}, I would like to enquire about Sofa Cleaning (${SOFA_PRICE})`}
-              >
-                Book Sofa Cleaning
-              </WaButton>
-            </div>
-            <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-navy">Curtain Cleaning</h3>
-              <p className="mt-3 text-3xl font-extrabold text-navy">{CURTAIN_PRICE}</p>
-              <ul className="mt-4 space-y-1.5 text-sm text-slate-500">
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Curtain cleaning</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Steaming</li>
-                <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-brand-teal" /> Suitable for thick and thin curtains</li>
-              </ul>
-              <WaButton
-                className="mt-5 w-full"
-                message={`Hello ${COMPANY}, I would like to enquire about Curtain Cleaning (${CURTAIN_PRICE})`}
-              >
-                Book Curtain Cleaning
-              </WaButton>
-            </div>
-          </div>
-          <p className="mx-auto mt-6 max-w-2xl rounded-xl bg-amber-50 px-4 py-3 text-center text-sm text-amber-800 ring-1 ring-amber-200">
-            Note: Stain removal and restoration are quoted separately after inspection.
-          </p>
+function SpecialtyPricing() {
+  return (
+    <section id="specialty-pricing" className="bg-slate-50 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="Specialized Cleaning"
+          title="Carpet, Sofa & Curtain Cleaning"
+          subtitle="Clear rates for the specialist cleaning your home needs."
+        />
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+            <h3 className="text-lg font-bold text-navy">Carpet Cleaning</h3>
+            <ul className="mt-3 divide-y divide-slate-100">
+              {CARPET_PRICES.map((c) => (
+                <li key={c.size} className="flex justify-between py-2 text-sm">
+                  <span className="text-slate-600">{c.size}</span><strong className="text-navy">{c.price}</strong>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs leading-relaxed text-slate-600">Wet and dry cleaning, carpet shampooing, and vacuum cleaning equipment.</p>
+            <WaButton className="mt-4 w-full" message={`Hello ${COMPANY}, I would like to enquire about Carpet Cleaning`}>Book Carpet Cleaning</WaButton>
+          </article>
+          <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+            <h3 className="text-lg font-bold text-navy">Sofa Cleaning</h3>
+            <p className="mt-2 text-2xl font-extrabold text-brand-blue">{SOFA_PRICE}</p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">Wet and dry cleaning, shampooing and disinfectant treatment.</p>
+            <WaButton className="mt-4 w-full" message={`Hello ${COMPANY}, I would like to enquire about Sofa Cleaning (${SOFA_PRICE})`}>Book Sofa Cleaning</WaButton>
+          </article>
+          <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+            <h3 className="text-lg font-bold text-navy">Curtain Cleaning</h3>
+            <p className="mt-2 text-2xl font-extrabold text-brand-blue">{CURTAIN_PRICE}</p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">Curtain cleaning and steaming, suitable for thick and thin curtains.</p>
+            <WaButton className="mt-4 w-full" message={`Hello ${COMPANY}, I would like to enquire about Curtain Cleaning (${CURTAIN_PRICE})`}>Book Curtain Cleaning</WaButton>
+          </article>
         </div>
+        <p className="mx-auto mt-5 max-w-2xl rounded-lg bg-amber-50 px-4 py-3 text-center text-sm text-amber-900">
+          Stain removal and restoration are quoted separately after inspection.
+        </p>
       </div>
     </section>
   )
@@ -696,31 +610,39 @@ function Pricing() {
 
 function WhyUs() {
   const items = [
-    { icon: ShieldCheck, title: 'Reliable Service', text: 'Dependable cleaning you can count on, every visit.' },
-    { icon: Sparkles, title: 'Professional Cleaning Solutions', text: 'Professional methods suited to each surface and space.' },
-    { icon: CheckCircle2, title: 'Quality Cleaning Equipment', text: 'Vacuum machines, low-foam solutions and carpet shampoo — we bring everything you need.' },
-    { icon: Star, title: 'Customer Satisfaction', text: 'A strong focus on detail and on your satisfaction.' },
-    { icon: Clock, title: 'Clear & Transparent Pricing', text: 'Published AED prices — no surprises, no hidden fees.' },
-    { icon: MapPin, title: 'Serving All UAE Emirates', text: 'From Dubai to Fujairah — coverage across the entire UAE.' },
+    { icon: ShieldCheck, title: 'Trusted & Reliable' },
+    { icon: Sparkles, title: 'Professional Solutions' },
+    { icon: CheckCircle2, title: 'Modern Equipment' },
+    { icon: Star, title: 'Customer Focused' },
+    { icon: MapPin, title: 'All UAE Emirates' },
   ]
   return (
-    <section className="bg-navy py-20 text-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mx-auto flex max-w-3xl items-center justify-center gap-6 text-center">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-orange-300">Why Choose Us</p>
-            <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Why Choose Simple Cooling?</h2>
-            <p className="mt-4 text-lg font-semibold text-sky-300">"We Bring Everything You Need."</p>
+    <section className="bg-white py-9 sm:py-12">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-6 px-4 sm:px-6 lg:grid-cols-[.72fr_1.5fr] lg:px-8">
+        <figure className="relative mx-auto w-full max-w-[250px] overflow-hidden rounded-xl sm:max-w-[320px] lg:max-w-none">
+          <img
+            src={HERO_MEDIA.cleanerWorking}
+            alt="Illustrative cleaning professional vacuuming a sofa, wearing a navy polo with the Simple Cooling logo"
+            className="aspect-[.78] w-full object-cover"
+            loading="lazy"
+          />
+          <figcaption className="absolute bottom-2 left-2 rounded bg-white/90 px-2 py-1 text-[10px] font-medium text-slate-600">
+            Illustrative stock image
+          </figcaption>
+        </figure>
+        <div>
+          <div className="text-center">
+            <h2 className="text-2xl font-extrabold text-navy sm:text-3xl">Why Choose Simple Cooling?</h2>
+            <p className="mt-1 text-sm text-slate-600">We bring professionalism, quality and care to every cleaning job.</p>
           </div>
-        </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((i) => (
-            <div key={i.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 transition hover:bg-white/10">
-              <i.icon className="h-8 w-8 text-orange-300" />
-              <h3 className="mt-3 font-bold">{i.title}</h3>
-              <p className="mt-1.5 text-sm text-slate-300">{i.text}</p>
-            </div>
-          ))}
+          <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+            {items.map((i) => (
+              <article key={i.title} className="flex min-h-[110px] flex-col items-center justify-center rounded-xl bg-white p-3 text-center shadow-[0_3px_12px_rgba(15,36,64,.12)] ring-1 ring-slate-100">
+                <i.icon className="h-7 w-7 text-brand-blue" />
+                <h3 className="mt-2 text-xs font-bold leading-tight text-navy">{i.title}</h3>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -930,115 +852,49 @@ function Faq() {
   )
 }
 
-function ContactCta() {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-brand-orange to-brand-blue py-14 text-white">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 text-center sm:px-6 md:flex-row md:text-left">
-        <div className="relative shrink-0">
-          <MediaImage
-            src={CONTACT_IMAGE.src}
-            alt={CONTACT_IMAGE.alt}
-            tone="navy"
-            className="h-40 w-56 rounded-2xl object-cover shadow-lg sm:h-48 sm:w-64"
-          />
-        </div>
-        <div className="flex-1">
-          <h2 className="text-3xl font-extrabold sm:text-4xl">Ready for a Cleaner Space?</h2>
-          <p className="mt-3 max-w-lg text-orange-50">
-            Message us on WhatsApp or call {PHONE_DISPLAY} — our team covers every emirate and will
-            confirm your booking fast.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
-            <WaButton className="!bg-white !text-navy hover:!bg-slate-100">Book Your Cleaning</WaButton>
-            <a
-              href={PHONE_TEL}
-              className="inline-flex items-center gap-2 rounded-full bg-navy/40 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/30 transition hover:bg-navy/60"
-            >
-              <Phone className="h-4 w-4" /> Call {PHONE_DISPLAY}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function Footer() {
   return (
-    <footer id="contact" className="bg-navy pb-24 pt-16 text-slate-300 lg:pb-16">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt={`${COMPANY} logo`}
-              className="h-16 w-auto rounded-xl bg-white object-contain p-1.5"
-            />
-          </div>
-          <p className="mt-4 text-sm leading-relaxed text-slate-400">
-            Professional cleaning solutions for residential and commercial properties across the
-            entire UAE.
+    <footer id="contact" className="border-t-4 border-brand-orange bg-navy pb-24 pt-8 text-slate-300 lg:pb-8">
+      <div className="mx-auto grid max-w-[1440px] gap-8 px-4 sm:px-6 lg:grid-cols-[1.1fr_1.6fr_1fr] lg:px-8">
+        <div className="flex items-center gap-4">
+          <img src={logo} alt={`${COMPANY} logo`} className="h-[68px] w-auto rounded-lg bg-white p-1" />
+          <p className="max-w-[210px] text-xs leading-relaxed text-slate-300">
+            Professional cleaning services across all Emirates of the UAE.
           </p>
         </div>
-        <div>
-          <h4 className="font-bold text-white">Contact</h4>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li>
-              <a href={PHONE_TEL} className="flex items-center gap-2 hover:text-orange-300">
-                <Phone className="h-4 w-4 text-brand-orange" /> {PHONE_DISPLAY}
-              </a>
-            </li>
-            <li>
-              <a
-                href={waLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-orange-300"
-              >
-                <MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp: {PHONE_DISPLAY}
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-orange-300">
-                <Mail className="h-4 w-4 text-sky-400" /> {EMAIL}
-              </a>
-            </li>
-            <li className="flex items-center gap-2 text-slate-400">
-              <MapPin className="h-4 w-4 text-brand-teal" /> Serving all UAE Emirates
-            </li>
-          </ul>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <a href={PHONE_TEL} className="flex items-center gap-2 text-sm hover:text-white">
+            <span className="rounded-full bg-white/10 p-2"><Phone className="h-4 w-4 text-orange-300" /></span>
+            <span><span className="block text-[10px] text-slate-400">Call Us Anytime</span>{PHONE_DISPLAY}</span>
+          </a>
+          <a href={waLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:text-white">
+            <span className="rounded-full bg-white/10 p-2"><WhatsAppIcon className="h-4 w-4 text-[#25D366]" /></span>
+            <span><span className="block text-[10px] text-slate-400">WhatsApp</span>Chat with us</span>
+          </a>
+          <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 text-sm hover:text-white">
+            <span className="rounded-full bg-white/10 p-2"><Mail className="h-4 w-4 text-sky-300" /></span>
+            <span><span className="block text-[10px] text-slate-400">Email Us</span>{EMAIL}</span>
+          </a>
+          <span className="flex items-center gap-2 text-sm">
+            <span className="rounded-full bg-white/10 p-2"><MapPin className="h-4 w-4 text-brand-teal" /></span>
+            <span><span className="block text-[10px] text-slate-400">Coverage</span>All UAE Emirates</span>
+          </span>
         </div>
-        <div>
-          <h4 className="font-bold text-white">Quick Links</h4>
-          <ul className="mt-4 space-y-2 text-sm">
-            {[
-              ['Home', '#home'],
-              ['About Us', '#about'],
-              ['Pricing', '#pricing'],
-              ['Gallery', '#gallery'],
-              ['Contact Us', '#contact'],
-            ].map(([l, h]) => (
-              <li key={h}>
-                <a href={h} className="hover:text-orange-300">{l}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-bold text-white">Our Services</h4>
-          <ul className="mt-4 space-y-2 text-sm">
-            {SERVICES_MENU.map((s) => (
-              <li key={s}>
-                <a href="#services" className="hover:text-orange-300">{s}</a>
-              </li>
-            ))}
-          </ul>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs lg:justify-end">
+          {[
+            ['Home', '#home'],
+            ['About Us', '#about'],
+            ['Services', '#services'],
+            ['Pricing', '#pricing'],
+            ['Gallery', '#gallery'],
+          ].map(([label, href]) => (
+            <a key={href} href={href} className="hover:text-orange-300">{label}</a>
+          ))}
         </div>
       </div>
-      <div className="mx-auto mt-12 max-w-7xl border-t border-white/10 px-4 pt-6 text-center text-xs text-slate-500 sm:px-6">
-        © {CURRENT_YEAR} {COMPANY}. All rights reserved. Professional cleaning services
-        across all Emirates of the UAE.
-        <span className="mt-2 block">Service photography is illustrative stock imagery, not company projects.</span>
+      <div className="mx-auto mt-7 flex max-w-[1440px] flex-col gap-2 border-t border-white/10 px-4 pt-4 text-center text-[10px] text-slate-400 sm:px-6 md:flex-row md:justify-between lg:px-8">
+        <span>© {CURRENT_YEAR} {COMPANY}. All rights reserved.</span>
+        <span>Service photographs are illustrative stock imagery.</span>
       </div>
     </footer>
   )
@@ -1073,16 +929,16 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <About />
         <Services />
         <Pricing />
         <WhyUs />
+        <SpecialtyPricing />
+        <About />
         <Gallery />
         <Coverage />
         <HowItWorks />
         <Testimonials />
         <Faq />
-        <ContactCta />
       </main>
       <Footer />
       <FloatingButtons />

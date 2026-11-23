@@ -12,10 +12,12 @@ paths and accurate alt text in `src/lib/media.ts`.
 
 ## Media slots
 
-- Hero: `public/media/hero/poster.webp`. Optional video: add `hero.mp4`
-  and/or `hero.webm` beside it and set the paths in `HERO_MEDIA` in
-  `src/lib/media.ts`. The hero stays a photograph until video is supplied.
-  Videos play muted, looped, and inline on desktop; mobile stays photographic.
+- Hero: `public/media/hero/cleaner-branded.webp` is cropped from the
+  reference image you supplied, with your original logo overlaid cleanly
+  on the shirt. `poster.webp` supplies the soft room-photo backdrop.
+  The input reference is a website mockup, so its crop is necessarily
+  softer than an original photograph. Replace it with your real staff photo
+  at the same path for the best quality.
 - Services: `public/media/services/*.webp`; the 10 filenames and alt text
   are listed in `SERVICE_IMAGES` in `src/lib/media.ts`.
 - Gallery: `public/media/gallery/*.webp` currently shows illustrative
@@ -42,7 +44,7 @@ photographers or the depicted people is claimed.
 
 | Slot | Pexels photo ID |
 |---|---|
-| Hero poster | 6197121 |
+| Hero soft-focus background | 6197121 |
 | Apartment deep cleaning | 6195198 |
 | Residential cleaning | 6195275 |
 | Villa deep cleaning | 6196692 |
@@ -57,4 +59,3 @@ photographers or the depicted people is claimed.
 | Gallery — glass / mirrors | 7513035 |
 | Gallery — office | 5882568 |
 | About illustration | 6195131 |
-| Contact illustration | 6195133 |

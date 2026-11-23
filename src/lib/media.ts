@@ -11,11 +11,9 @@
  */
 
 export const HERO_MEDIA = {
-  // Supply real footage before setting either video path. Until then,
-  // the photograph below is the finished hero, not a broken video player.
-  video: null as string | null,
-  videoWebm: null as string | null,
   poster: '/media/hero/poster.webp',
+  cleaner: '/media/hero/cleaner-branded.webp',
+  cleanerWorking: '/media/hero/cleaner-working-branded.webp',
 }
 
 export interface MediaSlot {
@@ -64,11 +62,6 @@ export const SERVICE_IMAGES: Record<string, MediaSlot> = {
     src: '/media/services/marble-polishing.webp',
     alt: 'Workers cleaning a large floor surface with equipment',
   },
-}
-
-export const CONTACT_IMAGE: MediaSlot = {
-  src: '/media/team/contact.webp',
-  alt: 'Cleaning professionals vacuuming and mopping a living room',
 }
 
 export const GALLERY_SHOWCASE: (MediaSlot & { label: string })[] = [
