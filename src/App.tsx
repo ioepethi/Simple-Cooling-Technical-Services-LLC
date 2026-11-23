@@ -148,14 +148,23 @@ function Header() {
             <button
               className="flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-orange"
               aria-haspopup="true"
+              aria-expanded={servicesOpen}
+              aria-controls="desktop-services-menu"
+              onClick={() => setServicesOpen(!servicesOpen)}
             >
               Our Services <ChevronDown className="h-4 w-4" />
             </button>
-            <div className="invisible absolute left-0 top-full w-60 rounded-xl border border-slate-100 bg-white py-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100">
+            <div
+              id="desktop-services-menu"
+              className={`invisible absolute left-0 top-full w-60 rounded-xl border border-slate-100 bg-white py-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
+                servicesOpen ? '!visible !opacity-100' : ''
+              }`}
+            >
               {SERVICES_MENU.map((s) => (
                 <a
                   key={s}
                   href="#services"
+                  onClick={() => setServicesOpen(false)}
                   className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand-orange"
                 >
                   {s}
@@ -573,8 +582,8 @@ function SpecialtyPricing() {
           title="Carpet, Sofa & Curtain Cleaning"
           subtitle="Clear rates for the specialist cleaning your home needs."
         />
-        <div className="mt-8 grid gap-5 lg:grid-cols-3">
-          <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <article className="flex h-full flex-col rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
             <h3 className="text-lg font-bold text-navy">Carpet Cleaning</h3>
             <ul className="mt-3 divide-y divide-slate-100">
               {CARPET_PRICES.map((c) => (
@@ -584,19 +593,19 @@ function SpecialtyPricing() {
               ))}
             </ul>
             <p className="mt-3 text-xs leading-relaxed text-slate-600">Wet and dry cleaning, carpet shampooing, and vacuum cleaning equipment.</p>
-            <WaButton className="mt-4 w-full" message={`Hello ${COMPANY}, I would like to enquire about Carpet Cleaning`}>Book Carpet Cleaning</WaButton>
+            <WaButton className="mt-auto w-full" message={`Hello ${COMPANY}, I would like to enquire about Carpet Cleaning`}>Book Carpet Cleaning</WaButton>
           </article>
-          <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+          <article className="flex h-full flex-col rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
             <h3 className="text-lg font-bold text-navy">Sofa Cleaning</h3>
             <p className="mt-2 text-2xl font-extrabold text-brand-blue">{SOFA_PRICE}</p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">Wet and dry cleaning, shampooing and disinfectant treatment.</p>
-            <WaButton className="mt-4 w-full" message={`Hello ${COMPANY}, I would like to enquire about Sofa Cleaning (${SOFA_PRICE})`}>Book Sofa Cleaning</WaButton>
+            <WaButton className="mt-auto w-full" message={`Hello ${COMPANY}, I would like to enquire about Sofa Cleaning (${SOFA_PRICE})`}>Book Sofa Cleaning</WaButton>
           </article>
-          <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+          <article className="flex h-full flex-col rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
             <h3 className="text-lg font-bold text-navy">Curtain Cleaning</h3>
             <p className="mt-2 text-2xl font-extrabold text-brand-blue">{CURTAIN_PRICE}</p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">Curtain cleaning and steaming, suitable for thick and thin curtains.</p>
-            <WaButton className="mt-4 w-full" message={`Hello ${COMPANY}, I would like to enquire about Curtain Cleaning (${CURTAIN_PRICE})`}>Book Curtain Cleaning</WaButton>
+            <WaButton className="mt-auto w-full" message={`Hello ${COMPANY}, I would like to enquire about Curtain Cleaning (${CURTAIN_PRICE})`}>Book Curtain Cleaning</WaButton>
           </article>
         </div>
         <p className="mx-auto mt-5 max-w-2xl rounded-lg bg-amber-50 px-4 py-3 text-center text-sm text-amber-900">
