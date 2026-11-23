@@ -268,6 +268,7 @@ function BookingForm() {
     service: '',
     property: '',
     location: '',
+    address: '',
     date: '',
     notes: '',
   })
@@ -284,6 +285,7 @@ function BookingForm() {
       `Service: ${form.service}`,
       `Property type: ${form.property}`,
       `Location / Emirate: ${form.location}`,
+      `Full address: ${form.address}`,
       form.date && `Preferred date: ${form.date}`,
       form.notes && `Notes: ${form.notes}`,
     ]
@@ -317,6 +319,17 @@ function BookingForm() {
           <option value="">Location / Emirate</option>
           {EMIRATES.map((e2) => <option key={e2}>{e2}</option>)}
         </select>
+        <input
+          required
+          name="address"
+          type="text"
+          autoComplete="street-address"
+          aria-label="Full Address"
+          placeholder="Full Address (Building, Street, Area)"
+          className={input}
+          value={form.address}
+          onChange={set('address')}
+        />
         <input type="date" aria-label="Preferred Date" className={input} value={form.date} onChange={set('date')} />
         <textarea aria-label="Additional Requirements" placeholder="Additional Requirements" rows={2} className={input} value={form.notes} onChange={set('notes')} />
         <button
@@ -341,6 +354,7 @@ function Hero() {
       id="home"
       className="relative overflow-hidden bg-[#f4f7f9] pt-24 text-navy sm:pt-28"
     >
+      <div className="hero-backdrop absolute inset-0" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-[1440px] items-center gap-4 px-4 pb-8 sm:px-6 lg:grid-cols-[minmax(300px,1fr)_minmax(350px,1.1fr)_minmax(280px,.85fr)] lg:gap-3 lg:px-8 lg:pb-3">
         <div className="relative z-10 py-5 sm:py-8 lg:py-10">
           <p className="mb-3 text-xs font-bold uppercase tracking-[.12em] text-brand-blue">
