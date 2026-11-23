@@ -15,7 +15,7 @@ import {
   Star,
   X,
 } from 'lucide-react'
-import logo from './assets/logo.png'
+import logo from './assets/logo.webp'
 import {
   CARPET_PRICES,
   COMPANY,
@@ -30,6 +30,14 @@ import {
   VILLA_PACKAGE,
   waLink,
 } from './lib/site'
+import {
+  CONTACT_IMAGE,
+  GALLERY_ITEMS,
+  GALLERY_SHOWCASE,
+  HERO_MEDIA,
+  SERVICE_IMAGES,
+} from './lib/media'
+import MediaImage from './components/MediaImage'
 
 const SERVICES_MENU = [
   'Apartment Deep Cleaning',
@@ -40,6 +48,8 @@ const SERVICES_MENU = [
   'Sofa Cleaning',
   'Curtain Cleaning',
 ]
+
+const CURRENT_YEAR = new Date().getFullYear()
 
 function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) {
   return (
@@ -119,14 +129,16 @@ function Header() {
         scrolled ? 'bg-white/95 shadow-md backdrop-blur' : 'bg-white/80 backdrop-blur'
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <a href="#home" className="flex items-center gap-2">
-          <img src={logo} alt={`${COMPANY} logo`} className="h-10 w-10 rounded-lg object-contain" />
-          <span className="hidden text-sm font-bold leading-tight text-navy sm:block">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:h-24 sm:px-6">
+        <a href="#home" className="flex items-center gap-3">
+          <img
+            src={logo}
+            alt={`${COMPANY} logo`}
+            className="h-14 w-auto object-contain sm:h-[84px]"
+          />
+          <span className="hidden border-l border-slate-200 pl-3 text-xs font-semibold leading-snug text-navy xl:block">
             Simple Cooling
-            <span className="block text-xs font-medium text-brand-blue">
-              Technical Services LLC
-            </span>
+            <span className="block font-normal text-brand-blue">Technical Services LLC</span>
           </span>
         </a>
 
@@ -340,6 +352,43 @@ function BookingForm() {
   )
 }
 
+function HeroVideo() {
+  const [ready, setReady] = useState(false)
+  const poster = (
+    <img
+      src={HERO_MEDIA.poster}
+      alt=""
+      aria-hidden="true"
+      fetchPriority="high"
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+  )
+
+  if (!HERO_MEDIA.video && !HERO_MEDIA.videoWebm) return poster
+
+  return (
+    <>
+      {poster}
+      <video
+        className={`absolute inset-0 hidden h-full w-full object-cover transition-opacity duration-700 md:block ${
+          ready ? 'opacity-100' : 'opacity-0'
+        }`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster={HERO_MEDIA.poster}
+        onCanPlay={() => setReady(true)}
+        aria-hidden="true"
+      >
+        {HERO_MEDIA.videoWebm && <source src={HERO_MEDIA.videoWebm} type="video/webm" />}
+        {HERO_MEDIA.video && <source src={HERO_MEDIA.video} type="video/mp4" />}
+      </video>
+    </>
+  )
+}
+
 function Hero() {
   const trust = [
     { icon: Home, label: 'Residential & Commercial Cleaning' },
@@ -349,8 +398,10 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-light to-brand-blue pb-16 pt-28 text-white"
+      className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-light to-brand-blue pb-16 pt-32 text-white sm:pt-36"
     >
+      <HeroVideo />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/75 to-navy/60" aria-hidden="true" />
       <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand-orange/25 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-brand-teal/25 blur-3xl" />
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr]">
@@ -359,24 +410,23 @@ function Hero() {
             <MapPin className="h-3.5 w-3.5" /> Professional Cleaning Services Across All Emirates of the UAE
           </p>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-            Professional Cleaning Services{' '}
+            Experience the Difference of{' '}
             <span className="bg-gradient-to-r from-orange-300 to-sky-300 bg-clip-text text-transparent">
-              Across the UAE
+              Professional Cleaning
             </span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-slate-200">
-            Experience a cleaner, fresher, and healthier environment with {COMPANY}. From apartment
-            deep cleaning to complete villa cleaning, we deliver professional cleaning solutions
-            tailored to your needs.
+            From apartments to villas and commercial spaces, Simple Cooling delivers professional
+            cleaning solutions across the entire UAE.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <WaButton className="!px-7 !py-3 !text-base">Book Your Cleaning</WaButton>
-            <a
-              href={PHONE_TEL}
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-7 py-3 text-base font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/20"
+            <WaButton
+              className="!bg-white/10 !text-white ring-1 ring-white/30 hover:!bg-white/20 !px-7 !py-3 !text-base"
+              message={`Hello ${COMPANY}, I would like to chat about your cleaning services.`}
             >
-              <Phone className="h-4 w-4" /> Call Us Now
-            </a>
+              WhatsApp Us
+            </WaButton>
           </div>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
             {trust.map((t) => (
@@ -417,6 +467,36 @@ function About() {
           title="Your Trusted Cleaning Partner"
           subtitle={`${COMPANY} is committed to providing reliable and professional cleaning solutions for residential and commercial properties. We understand that cleanliness contributes to comfort, productivity, and a healthier environment. Our focus is on delivering quality cleaning services through professional methods, suitable equipment, and customer-focused service.`}
         />
+        <div className="mx-auto mt-12 grid max-w-5xl items-center gap-8 lg:grid-cols-2">
+          <figure>
+            <MediaImage
+              src="/media/team/about.webp"
+              alt="Cleaning professionals with a vacuum and mop in a home"
+              tone="navy"
+              className="aspect-[4/3] w-full overflow-hidden rounded-2xl object-cover shadow-md"
+            />
+            <figcaption className="mt-2 text-xs text-slate-500">Illustrative stock photograph</figcaption>
+          </figure>
+          <div className="rounded-2xl bg-slate-50 p-7 sm:p-9">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange">
+              A cleaner space, made simple
+            </p>
+            <h3 className="mt-3 text-2xl font-bold text-navy">
+              Professional care for the places that matter.
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              From everyday home cleaning to deep cleaning for apartments, villas and commercial
+              spaces, our team works around your needs. Tell us what you need and where you are;
+              we’ll help you choose the right service.
+            </p>
+            <a
+              href="#services"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-brand-orange"
+            >
+              Explore our services <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {cards.map((c) => (
             <div
@@ -464,17 +544,13 @@ function Services() {
               key={s.title}
               className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 transition hover:shadow-lg"
             >
-              <div
-                className={`flex h-36 items-center justify-center bg-gradient-to-br ${
-                  i % 3 === 0
-                    ? 'from-brand-orange/15 to-brand-blue/15'
-                    : i % 3 === 1
-                      ? 'from-brand-blue/15 to-brand-teal/15'
-                      : 'from-brand-teal/15 to-brand-orange/15'
-                }`}
-              >
-                <Sparkles className="h-10 w-10 text-brand-blue/60 transition group-hover:scale-110" />
-              </div>
+              <MediaImage
+                src={SERVICE_IMAGES[s.title].src}
+                alt={SERVICE_IMAGES[s.title].alt}
+                label={s.title}
+                tone={i % 3 === 0 ? 'orange' : i % 3 === 1 ? 'blue' : 'teal'}
+                className="h-40 w-full object-cover transition group-hover:scale-[1.03]"
+              />
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="font-bold text-navy">{s.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.desc}</p>
@@ -630,10 +706,12 @@ function WhyUs() {
   return (
     <section className="bg-navy py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-orange-300">Why Choose Us</p>
-          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Why Choose Simple Cooling?</h2>
-          <p className="mt-4 text-lg font-semibold text-sky-300">"We Bring Everything You Need."</p>
+        <div className="mx-auto flex max-w-3xl items-center justify-center gap-6 text-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-orange-300">Why Choose Us</p>
+            <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Why Choose Simple Cooling?</h2>
+            <p className="mt-4 text-lg font-semibold text-sky-300">"We Bring Everything You Need."</p>
+          </div>
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((i) => (
@@ -650,34 +728,68 @@ function WhyUs() {
 }
 
 function Gallery() {
-  const slots = [
-    'Carpet Cleaning Results',
-    'Sofa Cleaning Results',
-    'Residential Cleaning',
-    'Commercial Cleaning',
-    'Villa Deep Cleaning',
-    'Before & After',
-  ]
   return (
     <section id="gallery" className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Gallery"
-          title="Before & After"
-          subtitle="Real cleaning transformations — photos of our work are being added as projects are completed."
+          title={GALLERY_ITEMS.length ? 'Before & After' : 'Spaces Worth Caring For'}
+          subtitle={
+            GALLERY_ITEMS.length
+              ? 'Real results from completed cleaning projects.'
+              : 'A look at the homes and workplaces that inspire the care we bring to every cleaning.'
+          }
         />
-        <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
-          {slots.map((s) => (
-            <div
-              key={s}
-              className="flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 text-center"
-            >
-              <Sparkles className="h-8 w-8 text-slate-400" />
-              <p className="px-3 text-sm font-semibold text-slate-500">{s}</p>
-              <p className="text-xs text-slate-400">Photos coming soon</p>
+        {GALLERY_ITEMS.length ? (
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {GALLERY_ITEMS.map((g) => (
+              <figure key={g.label} className="overflow-hidden rounded-xl shadow-sm">
+                <div className="grid grid-cols-2">
+                  <div className="relative">
+                    <MediaImage
+                      src={g.before}
+                      alt={`${g.label} before cleaning`}
+                      className="aspect-square w-full object-cover"
+                    />
+                    <span className="absolute left-2 top-2 rounded bg-navy px-2 py-1 text-xs font-bold text-white">
+                      Before
+                    </span>
+                  </div>
+                  <div className="relative">
+                    <MediaImage
+                      src={g.after}
+                      alt={`${g.label} after cleaning`}
+                      className="aspect-square w-full object-cover"
+                    />
+                    <span className="absolute left-2 top-2 rounded bg-brand-teal px-2 py-1 text-xs font-bold text-white">
+                      After
+                    </span>
+                  </div>
+                </div>
+                <figcaption className="bg-white px-3 py-2 text-center text-sm font-semibold text-navy">
+                  {g.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <>
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+              {GALLERY_SHOWCASE.map((g) => (
+                <figure key={g.label} className="overflow-hidden rounded-xl bg-white shadow-sm">
+                  <MediaImage src={g.src} alt={g.alt} className="aspect-[4/3] w-full object-cover" />
+                  <figcaption className="bg-white px-3 py-2 text-center text-sm font-semibold text-navy">
+                    {g.label}
+                  </figcaption>
+                </figure>
+              ))}
             </div>
-          ))}
-        </div>
+            <p className="mt-5 text-center text-xs text-slate-500">
+              Illustrative stock photography. Genuine before-and-after project photos will be shared
+              here when available.
+            </p>
+          </>
+        )}
       </div>
     </section>
   )
@@ -717,7 +829,9 @@ function HowItWorks() {
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow="How It Works" title="Booking in 4 Simple Steps" />
+        <div className="flex items-center justify-center gap-8">
+          <SectionHeading eyebrow="How It Works" title="Booking in 4 Simple Steps" />
+        </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s) => (
             <div key={s.n} className="relative rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
@@ -816,17 +930,50 @@ function Faq() {
   )
 }
 
+function ContactCta() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-r from-brand-orange to-brand-blue py-14 text-white">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 text-center sm:px-6 md:flex-row md:text-left">
+        <div className="relative shrink-0">
+          <MediaImage
+            src={CONTACT_IMAGE.src}
+            alt={CONTACT_IMAGE.alt}
+            tone="navy"
+            className="h-40 w-56 rounded-2xl object-cover shadow-lg sm:h-48 sm:w-64"
+          />
+        </div>
+        <div className="flex-1">
+          <h2 className="text-3xl font-extrabold sm:text-4xl">Ready for a Cleaner Space?</h2>
+          <p className="mt-3 max-w-lg text-orange-50">
+            Message us on WhatsApp or call {PHONE_DISPLAY} — our team covers every emirate and will
+            confirm your booking fast.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+            <WaButton className="!bg-white !text-navy hover:!bg-slate-100">Book Your Cleaning</WaButton>
+            <a
+              href={PHONE_TEL}
+              className="inline-flex items-center gap-2 rounded-full bg-navy/40 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/30 transition hover:bg-navy/60"
+            >
+              <Phone className="h-4 w-4" /> Call {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Footer() {
   return (
     <footer id="contact" className="bg-navy pb-24 pt-16 text-slate-300 lg:pb-16">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo} alt={`${COMPANY} logo`} className="h-12 w-12 rounded-xl bg-white object-contain p-1" />
-            <div>
-              <p className="font-bold text-white">Simple Cooling</p>
-              <p className="text-xs text-slate-400">Technical Services LLC</p>
-            </div>
+            <img
+              src={logo}
+              alt={`${COMPANY} logo`}
+              className="h-16 w-auto rounded-xl bg-white object-contain p-1.5"
+            />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
             Professional cleaning solutions for residential and commercial properties across the
@@ -889,8 +1036,9 @@ function Footer() {
         </div>
       </div>
       <div className="mx-auto mt-12 max-w-7xl border-t border-white/10 px-4 pt-6 text-center text-xs text-slate-500 sm:px-6">
-        © {new Date().getFullYear()} {COMPANY}. All rights reserved. Professional cleaning services
+        © {CURRENT_YEAR} {COMPANY}. All rights reserved. Professional cleaning services
         across all Emirates of the UAE.
+        <span className="mt-2 block">Service photography is illustrative stock imagery, not company projects.</span>
       </div>
     </footer>
   )
@@ -934,6 +1082,7 @@ export default function App() {
         <HowItWorks />
         <Testimonials />
         <Faq />
+        <ContactCta />
       </main>
       <Footer />
       <FloatingButtons />
