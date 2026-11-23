@@ -12,9 +12,9 @@ paths and accurate alt text in `src/lib/media.ts`.
 
 ## Media slots
 
-- Hero: `public/media/company/living-room-cleaning.webp` and the
-  `carpet-cleaning-city.webp` backdrop are sourced from your `Company Data/Photo`
-  folder.
+- Hero: `public/media/company/living-room-cleaning.webp` is the single,
+  full-color hero photo from your `Company Data/Photo` folder. The duplicate
+  faded background image has been removed.
 - Why Choose: `public/media/company/team-apartment.webp` uses your supplied
   Simple Cooling team photo.
 - Services: `public/media/services/*.webp`; the 10 filenames and alt text

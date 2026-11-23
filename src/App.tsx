@@ -332,8 +332,7 @@ function Hero() {
       id="home"
       className="relative overflow-hidden bg-[#f4f7f9] pt-24 text-navy sm:pt-28"
     >
-      <div className="hero-backdrop absolute inset-0" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-[1440px] items-center gap-4 px-4 pb-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(250px,.9fr)_minmax(270px,.82fr)] lg:gap-3 lg:px-8 lg:pb-3">
+      <div className="relative mx-auto grid max-w-[1440px] items-center gap-4 px-4 pb-8 sm:px-6 lg:grid-cols-[minmax(300px,1fr)_minmax(350px,1.1fr)_minmax(280px,.85fr)] lg:gap-3 lg:px-8 lg:pb-3">
         <div className="relative z-10 py-5 sm:py-8 lg:py-10">
           <p className="mb-3 text-xs font-bold uppercase tracking-[.12em] text-brand-blue">
             Professional cleaning • Across the UAE
@@ -366,11 +365,11 @@ function Hero() {
           </ul>
         </div>
 
-        <figure className="relative mx-auto flex w-full max-w-[380px] items-end justify-center lg:h-[440px] lg:max-w-none">
+        <figure className="relative mx-auto w-full max-w-[480px] overflow-hidden rounded-xl shadow-[0_8px_28px_rgba(15,36,64,.16)] lg:max-w-none">
           <img
             src={HERO_MEDIA.cleaner}
             alt="Simple Cooling technician cleaning a luxury living room sofa"
-            className="max-h-[390px] w-auto max-w-full object-contain object-bottom lg:absolute lg:bottom-0 lg:h-full lg:max-h-none"
+            className="block aspect-[4/3] w-full object-cover object-[58%_center]"
             fetchPriority="high"
           />
         </figure>

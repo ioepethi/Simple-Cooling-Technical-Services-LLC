@@ -13,7 +13,6 @@
 export const HERO_MEDIA = {
   cleaner: '/media/company/living-room-cleaning.webp',
   cleanerWorking: '/media/company/team-apartment.webp',
-  carpetBackdrop: '/media/company/carpet-cleaning-city.webp',
 }
 
 export interface MediaSlot {
@@ -43,8 +42,8 @@ export const SERVICE_IMAGES: Record<string, MediaSlot> = {
     alt: 'Cleaner wiping a dining area in a modern home',
   },
   'Carpet Cleaning': {
-    src: '/media/services/carpet-cleaning.webp',
-    alt: 'Vacuum cleaner working over a carpet',
+    src: '/media/company/carpet-cleaning-city.webp',
+    alt: 'Simple Cooling technician deep-cleaning carpet in a city-view living room',
   },
   'Sofa Cleaning': {
     src: '/media/services/sofa-cleaning.webp',
